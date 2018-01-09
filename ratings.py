@@ -3,8 +3,8 @@
 import sys
 
 
-def print_restaurant_ratings(filename):
-    """Takes a file with restaurant ratings and prints each one"""
+def create_restaurant_ratings_dict(filename):
+    """Takes a file with restaurant ratings and creates a dictionary"""
 
     restaurant_ratings_dict = {}
 
@@ -14,9 +14,33 @@ def print_restaurant_ratings(filename):
             restaurant_entry = line.split(":")
             restaurant_ratings_dict[restaurant_entry[0]] = restaurant_entry[1]
 
-    restaurant_ratings_list = sorted(restaurant_ratings_dict.items())
+    return restaurant_ratings_dict
+
+
+def print_restaurant_ratings(restaurant_ratings):
+    """Prints a list of restaurants and their ratings
+
+    parameter: dictionary of restaurants and ratings
+    """
+
+    restaurant_ratings_list = sorted(restaurant_ratings.items())
 
     for restaurant, rating in restaurant_ratings_list:
         print "{} is rated at {}.".format(restaurant, rating)
 
-print_restaurant_ratings(sys.argv[1])
+
+def add_new_restaurant(restaurant_ratings_dict):
+    """Adds new restaurant and rating based on user input"""
+
+    new_restaurant_name = raw_input("What restaurant do you want to add? ")
+    new_restaurant_score = int(raw_input(
+                "How would you rate the restaurant on a scale of 1 to 5? "))
+
+    restaurant_ratings_dict[new_restaurant_name] = new_restaurant_score
+
+    print_restaurant_ratings(restaurant_ratings_dict)
+
+
+restaurant_ratings_dict = create_restaurant_ratings_dict(sys.argv[1])
+add_new_restaurant(restaurant_ratings_dict)
+

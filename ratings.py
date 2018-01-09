@@ -53,6 +53,30 @@ def add_new_restaurant(restaurant_ratings_dict):
     return restaurant_ratings_dict
 
 
-restaurant_ratings_dict = create_restaurant_ratings_dict(sys.argv[1])
-add_new_restaurant(restaurant_ratings_dict)
+def create_yelp_knockoff(restaurant_ratings_dict):
+    """Allows user to rate restaurants and view ratings"""
 
+    while True:
+
+        user_choice = raw_input("""What would you like to do?
+            A) View all restaurant ratings
+            B) Add a new restaurant
+            C) Quit
+            > """)
+
+        if user_choice.lower() == 'c':
+            print "Okay, bye!"
+            break
+
+        elif user_choice.lower() == 'a':
+            print_restaurant_ratings(restaurant_ratings_dict)
+
+        elif user_choice.lower() == 'b':
+            add_new_restaurant(restaurant_ratings_dict)
+
+        else:
+            print "Please enter A, B, or C."
+
+
+restaurant_ratings_dict = create_restaurant_ratings_dict(sys.argv[1])
+create_yelp_knockoff(restaurant_ratings_dict)
